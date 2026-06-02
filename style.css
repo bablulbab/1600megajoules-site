@@ -374,3 +374,104 @@ transform:translateY(0px);
 transform:translateY(-14px);
 }
 }
+/* ===== PREMIUM FINISHING TOUCHES ===== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+a,
+button,
+.btn,
+.card,
+.book-cover {
+  transition: all 0.35s ease;
+}
+
+/* Nav hover glow */
+.nav a:hover {
+  color: #e4bd5f;
+  text-shadow: 0 0 12px rgba(228, 189, 95, 0.7);
+}
+
+/* Premium button glow */
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 28px rgba(228, 189, 95, 0.65);
+}
+
+.btn-dark:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.18);
+}
+
+/* Book cover cinematic lift */
+.book-cover:hover {
+  transform: scale(1.04) translateY(-8px);
+  box-shadow: 0 0 45px rgba(228, 189, 95, 0.45);
+}
+
+/* Awakening cards premium hover */
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 35px rgba(228, 189, 95, 0.22);
+  border-color: rgba(228, 189, 95, 0.45);
+}
+
+/* Soft page entrance */
+.hero-left,
+.hero-visual,
+.section {
+  animation: fadeUp 1s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile premium spacing */
+@media (max-width: 768px) {
+  .nav {
+    padding: 22px 24px;
+  }
+
+  nav {
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero {
+    padding: 110px 24px 70px;
+    text-align: center;
+  }
+
+  .hero-left h1 {
+    font-size: 72px;
+    line-height: 0.95;
+  }
+
+  .hero-left h1 span {
+    font-size: 58px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .book-cover {
+    max-width: 280px;
+  }
+
+  .section {
+    padding: 70px 24px;
+  }
+}
