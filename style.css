@@ -590,3 +590,19 @@ margin-bottom:24px;
 .book-text p:last-child{
 margin-bottom:0;
 }
+.book-question{
+font-size:38px;
+font-weight:700;
+text-align:center;
+color:#e7c15d;
+margin:40px 0;
+font-family:Georgia,serif;
+}
+
+.book-ending{
+font-size:34px;
+text-align:center;
+margin-top:50px;
+font-family:Georgia,serif;
+color:#f5f5f5;
+}
