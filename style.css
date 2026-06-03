@@ -569,3 +569,24 @@ justify-content:center;
 }
 
 }
+
+.book-text{
+max-width:950px;
+margin:0 auto;
+padding:42px;
+border-radius:28px;
+background:rgba(255,255,255,0.045);
+border:1px solid rgba(216,180,95,0.22);
+box-shadow:0 20px 60px rgba(0,0,0,0.35);
+}
+
+.book-text p{
+font-size:20px;
+line-height:1.9;
+color:#d8d8d8;
+margin-bottom:24px;
+}
+
+.book-text p:last-child{
+margin-bottom:0;
+}
