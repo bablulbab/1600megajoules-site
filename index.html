@@ -82,6 +82,20 @@ class="book-cover"
 <div class="book-preorder">
 <p><strong>Coming 17 December 2026.</strong> Pre-orders are open at a special price of <strong>£15.99</strong>.</p>
 <a class="btn btn-gold" href="https://www.rayanypublishing.com/motivational/1600-mega-joules-by-bibhu-acharya/" target="_blank" rel="noopener noreferrer">Pre-Order at Rayany Publishing</a>
+
+<div class="amazon-launch-wrap">
+  <a id="amazon-launch-button"
+     class="btn btn-amazon-launch is-disabled"
+     href="#"
+     aria-disabled="true"
+     tabindex="-1">
+    Available on Amazon · 17 December 2026
+  </a>
+  <p id="amazon-launch-note" class="amazon-launch-note">
+    The Amazon button will activate automatically at 00:00 UK time on 17 December 2026.
+  </p>
+</div>
+
 <p class="book-preorder-small">International shipping available; final delivery cost shown at checkout.</p>
 </div>
 <div class="book-text">
@@ -325,6 +339,90 @@ Blending philosophy, psychology, neuroscience, spirituality and lived experience
     Contact: <a href="mailto:author@1600megajoules.com">author@1600megajoules.com</a>
   </p>
 </footer>
+
+
+<script>
+(function () {
+  const launchButton = document.getElementById("amazon-launch-button");
+  const launchNote = document.getElementById("amazon-launch-note");
+  if (!launchButton) return;
+
+  const launchTime = Date.UTC(2026, 11, 17, 0, 0, 0);
+
+  const amazonIndiaSearch =
+    "https://www.amazon.in/s?k=" +
+    encodeURIComponent("1600 Mega Joules Awaken the Hidden Sun Within Bibhu Acharya");
+
+  const amazonGlobalSearch =
+    "https://www.amazon.com/s?k=" +
+    encodeURIComponent("1600 Mega Joules Awaken the Hidden Sun Within Bibhu Acharya");
+
+  function looksLikeIndia() {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    const languages = navigator.languages || [navigator.language || ""];
+    return (
+      timezone === "Asia/Kolkata" ||
+      timezone === "Asia/Calcutta" ||
+      languages.some(lang => /^en-IN$/i.test(lang) || /^hi(-|$)/i.test(lang))
+    );
+  }
+
+  async function detectCountry() {
+    try {
+      const response = await fetch("https://ipapi.co/country/", {
+        method: "GET",
+        mode: "cors",
+        cache: "no-store"
+      });
+      if (!response.ok) throw new Error("Country lookup failed");
+      return (await response.text()).trim().toUpperCase();
+    } catch (error) {
+      return looksLikeIndia() ? "IN" : "OTHER";
+    }
+  }
+
+  async function activateAmazonButton() {
+    if (Date.now() < launchTime) {
+      launchButton.classList.add("is-disabled");
+      launchButton.setAttribute("aria-disabled", "true");
+      launchButton.setAttribute("tabindex", "-1");
+      launchButton.removeAttribute("target");
+      launchButton.href = "#";
+      return;
+    }
+
+    const country = await detectCountry();
+    const destination = country === "IN" ? amazonIndiaSearch : amazonGlobalSearch;
+
+    launchButton.href = destination;
+    launchButton.target = "_blank";
+    launchButton.rel = "noopener noreferrer";
+    launchButton.textContent = country === "IN" ? "Buy on Amazon India" : "Buy on Amazon";
+    launchButton.classList.remove("is-disabled");
+    launchButton.setAttribute("aria-disabled", "false");
+    launchButton.removeAttribute("tabindex");
+
+    if (launchNote) {
+      launchNote.textContent = country === "IN"
+        ? "You will be taken to Amazon.in."
+        : "You will be taken to Amazon.com.";
+    }
+  }
+
+  launchButton.addEventListener("click", function (event) {
+    if (launchButton.classList.contains("is-disabled")) {
+      event.preventDefault();
+    }
+  });
+
+  activateAmazonButton();
+
+  const msUntilLaunch = launchTime - Date.now();
+  if (msUntilLaunch > 0 && msUntilLaunch < 2147483647) {
+    setTimeout(activateAmazonButton, msUntilLaunch + 1000);
+  }
+})();
+</script>
 
 </body>
 </html>
